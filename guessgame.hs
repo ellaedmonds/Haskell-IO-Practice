@@ -41,22 +41,28 @@
 
 guessIt :: Int -> Int -> IO ()
 guessIt maxNum minNum =  do
-    let guessNum = div (minNum+maxNum) 2
+    let guessNum = div (maxNum+minNum) 2
     if (maxNum - minNum) >= 2
-        then putStrLn ("Is your number greater than " ++ show guessNum ++ "? (answer \"yes\" or \"no\") ")
+        then do 
+            putStrLn ("Is your number greater than " ++ show guessNum ++ "? (answer \"yes\" or \"no\") ")
             reply <- getLine
-        if reply == "yes"
-            then guessIt maxNum guessNum
-        else guessIt guessNum minNum
-    else putStrLn ("Is your number " ++ show minNum ++ "? (answer \"yes\" or \"no\") ")
-        answer <- getLine
-        if answer == "yes"
-            then putStrLn ("I KNEW IT! Thank you.")
-        else putStrLn ("Is your number " ++ show maxNum ++ "? (answer \"yes\" or \"no\") ")
-            answer2 <- getLine
-            if answer2 == "yes"
-                then putStrLn ("I KNEW IT! Thank you.")
-            else putStrLn ("I think you screwed up somewhere")
+            if reply == "yes"
+                then guessIt maxNum guessNum
+            else guessIt guessNum minNum
+            main
+        else do
+            putStrLn ("Is your number " ++ show minNum ++ "? (answer \"yes\" or \"no\") ")
+            answer <- getLine
+            if answer == "yes"
+                then  
+                    putStrLn ("I KNEW IT! Thank you.")
+                else do
+                    putStrLn ("Is your number " ++ show maxNum ++ "? (answer \"yes\" or \"no\") ")
+                    answer2 <- getLine
+                    if answer2 == "yes"
+                        then putStrLn ("I KNEW IT! Thank you.")
+                        else putStrLn ("I think you screwed up somewhere")
+            main
 
 main = do
     putStrLn "Think of a number between 1 and 1000 and I will guess it."
