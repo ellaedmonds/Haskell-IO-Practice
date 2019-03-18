@@ -45,8 +45,21 @@
 -}
 
 -- Copy your fizzBuzz function and supporting functions here
+--stringtointegers a = map (read :: String -> Int) [x:[] | x <- (show a)]
+isDivisor n d = n `mod` d == 0
+fizzBuzz n f b = [ if isDivisor x f then if isDivisor x b then "FizzBuzz" else "Fizz" else if isDivisor x b then "Buzz" else show x | x <- [1..n]]
 
 
-
-main = putStrLn "Put your program here!"
+main = do
+    putStrLn "How many numbers shall we print?"
+    nstr  <- getLine
+    let n = ( read nstr ) :: Int
+    putStrLn "For multiples of what number shall we print 'Fizz'?"
+    fstr  <- getLine
+    let f = (read fstr ) :: Int
+    putStrLn "For multiples of what number shall we print 'Buzz'?"
+    bstr  <- getLine
+    let b = ( read bstr ) :: Int
+    print n
+    mapM_ putStrLn ( fizzBuzz n f b )
 
